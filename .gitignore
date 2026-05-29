@@ -7,3 +7,5 @@ venv/
 .env
 pruebas/
 pruebas.py
+database/
+config.py
