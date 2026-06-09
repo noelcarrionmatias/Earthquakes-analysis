@@ -1,6 +1,9 @@
-import geopandas as gpd
-from src import transform
-
-transform.add_geospatial_features()
-
-world = gpd.read_file(r"C:\Users\BICAMANO\Documents\Earthquakes-analysis\database\geoespatial\ne_10m_admin_0_countries\ne_10m_admin_0_countries.shp",crs="epsg=4326") # Lee la capa del mundo con proyecion epsg=3857
+'''import sqlite3
+conn = sqlite3.connect(r"database\processed\earthquakes_API.db") # Connexión a .db
+cursor = conn.cursor()
+cursor.execute("select count() from earthquakes_clean")
+print(cursor.fetchall())
+cursor.execute("Select name from sqlite_master where type='table'")
+print(cursor.fetchall())'''
+import sys
+print(sys.executable)

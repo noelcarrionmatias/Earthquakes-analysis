@@ -10,11 +10,13 @@ def create_dir(db_path):
         print(f"Error: {e}")
 
 
-def load_to_sql(df, db_path, mode="append"): # definimos mode="append" por si hay más de 1 df de carga y no lo borre con replace
+def load_to_sql(df, conn, mode="append"): # definimos mode="append" por si hay más de 1 df de carga y no lo borre con replace
     try:
-        create_dir(db_path)
-        with sqlite3.connect(db_path) as conn:
-            df.to_sql(name="earthquakes_clean", con=conn,if_exists=mode, index=False)
+        df.to_sql(name="earthquakes_clean", 
+                  con=conn,
+                  if_exists=mode, # append predefinido
+                  index=False,
+                  chunksize=1000) # bloques de 1000
         
     except Exception as e:
-        print(f"Error en la conexión al .db: {e}")
+        print(f"Error en load_to_sql: {e}")

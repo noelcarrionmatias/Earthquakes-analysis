@@ -2,7 +2,7 @@
 
 Análisis de los terremotos superiores a 2.5 en la escala de Richter en todo el mundo. Generar estadísticas sobre los terremotos (cantidad por país, rangos, evolución en el tiempo, etc.). El proyecto se realizará integrando Python, SQLite y Power BI.
 
-Se utiliza SQLite porque no necesita instalar nada. Genera un archivo local .db, perfecto para proyectos como éste.
+Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, perfecto para proyectos como éste y mejora su portabilidad.
 
 ## Tecnologías utilizadas
 
@@ -13,13 +13,18 @@ Se utiliza SQLite porque no necesita instalar nada. Genera un archivo local .db,
     - pandas
     - geopandas
     - sqlite3
+    - seaborn
+    - matplotlib
+    - time
+    - calendar
+    - json
     
 # Preguntas a responder
 
 - Número de terremotos por país.
 - Qué país tiene mayor actividad sísmica.
 - Top 10 terremotos.
-- Evolución de terremotos temporal.
+- Evolución temporal de terremotos.
 - Relación magnitud vs profundidad.
 - Distribución geográfica (mapa).
 - Frecuencia de terremotos > 6 por año.
@@ -27,12 +32,14 @@ Se utiliza SQLite porque no necesita instalar nada. Genera un archivo local .db,
 
 # Modelado de procesamiento
 
-- Descarga de datos en https://earthquake.usgs.gov/ en formato CSV
-- Inspección de la estructura de datos en Python
-- CLEAN layer mediante Python (funciones en transform.py)
-    - Dar formato date a la fecha del terremoto
-    - Extraer el país y normalizarlo
-- Cargar datos, crear tablas y vistas con SQLite
+- ETL:
+    - Descarga de datos de terremotos en https://earthquake.usgs.gov/ en formato CSV y capa de países (1:10m Cultural Vectors - Admin 0 - countries) en https://www.naturalearthdata.com/
+    - Inspección de la estructura de datos en Python
+    - CLEAN data mediante Python
+        - Dar formato de fecha a la fecha del terremoto
+        - Crear columnas necesarias para su posterior análisis
+        - Extraer el país y normalizarlo a través de un spatial join con geopandas y la capa de países de naturalearthdata.
+    - Cargar datos, crear tablas y vistas con SQLite
 - Generar gráficas en Power BI y Python
 
 # Estructura

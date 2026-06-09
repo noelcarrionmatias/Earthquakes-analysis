@@ -32,15 +32,38 @@ def normalize_country(df):
     return df
 
 def add_geospatial_features(df):
-    gdf = gpd.GeoDataFrame(df, gpd.points_from_xy(df["longitude"],df["latitude"]),crs="EPSG=4326") # Crear un geodataframe a partir de lon y lat del df con proyeccion epsg=3857
-    world = gpd.read_file(r"C:\Users\BICAMANO\Documents\Earthquakes-analysis\database\geoespatial\ne_10m_admin_0_countries\ne_10m_admin_0_countries.shp") # Lee la capa del mundo con proyecion epsg=3857
+    gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df["longitude"],df["latitude"]),crs="EPSG:4326") # Crear un geodataframe a partir de lon y lat del df con proyeccion epsg=4326
+    world = gpd.read_file(r"C:\Users\BICAMANO\Documents\Earthquakes-analysis\database\geoespatial\ne_10m_admin_0_countries\ne_10m_admin_0_countries.shp") # Lee la capa del mundo con proyecion epsg=4326
     gdf = gdf.to_crs(epsg=3857) # Reproyectar capa al 3857
     world = world.to_crs(epsg=3857) # Reproyectar capa al 3857
+    world = world[["NAME", "geometry"]] # Crea otro "world" solo con lo que nos interesa (name y geom)
     result = gpd.sjoin(gdf, world,how='left',predicate="within") # Creamos un espatial join de gdf y world
+    result["geo_country"] = result["NAME"] # Asigna el nombre del del país a la columna "geo_country"
+    result["is_ocean"] = result["geo_country"].isna() # Si es null, es oceano.
+    result["geo_country"] = result["geo_country"].fillna("Ocean") # Rellena espacios en blanco en "geo_country"
+    result = result.drop(columns=["NAME", "geometry", "index_right"]) # Borramos las columnas innecesarias
     return result
 
+def geojson_to_dataset(data):
+    records = []
 
+    for eq in data["features"]:
+        properties = eq["properties"]
+        geometry = eq["geometry"]
+        records.append({
+            "id":eq["id"],
+            "time":properties["time"],
+            "mag":properties["mag"],
+            "place":properties["place"],
+            "latitude":geometry["coordinates"][1],
+            "longitude":geometry["coordinates"][0],
+            "depth":geometry["coordinates"][2],
+            "tsunami":properties["tsunami"]
 
+        })
 
+    df = pd.DataFrame(records)
+    df["time"] = pd.to_datetime(df["time"], unit="ms")
+    return df
 
 

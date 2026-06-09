@@ -1,3 +1,5 @@
+drop table if exists earthquakes_clean;
+
 create table earthquakes_clean (
     id text primary key,
     time text, -- no acepta el tipo de dato datetime, por lo que se almacena como texto
@@ -8,7 +10,9 @@ create table earthquakes_clean (
     longitude real,
     depth real,
     mag real,
+    tsunami text,
     country text,
-    place text,
-    type text -- indica si es un terremoto, una réplica, etc.
+    geo_country text,
+    is_ocean text,
+    place text
 );
