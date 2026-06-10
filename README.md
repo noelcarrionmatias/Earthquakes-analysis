@@ -95,7 +95,7 @@ earthquakes-analysis/
 
 ### 1. Distribución por magnitud
 
-- >70% de los terremotos son de magnitud <2
+- +70% de los terremotos son de magnitud <2
 - Confirmación de una actividad sísmica activa pero de baja intensidad
 
 ### 2. Evolución temporal
@@ -128,15 +128,15 @@ earthquakes-analysis/
 
 ## Ejemplos visuales
 
-images/distribucion_zonas.png
+![Distribucion](images/distribucion_zonas.png)
 
-images/eventos_alta_magnitud_paises.png
+![Alta magnitud](images/eventos_alta_magnitud_paises.png)
 
-images/magnitudes.png
+![Magnitudes](images/magnitudes.png)
 
-images/Usa_vs_resto.png
+![USA vs Resto](images/Usa_vs_resto.png)
 
-images/max_terremoto_año.png
+![Máximo terremoto por año](images/max_terremoto_año.png)
 
 ## Conclusiones
 
@@ -152,5 +152,5 @@ images/max_terremoto_año.png
 
 ## Sobre los datos
 
-- Debido al tamaño del dataset, no está incluido en el respositorio.
-- Para reproducir los resutados, ejecutar "main_API.py"
+Debido al tamaño del dataset, no está incluido en el respositorio.
+Para reproducir los resutados, ejecutar "main_API.py"
