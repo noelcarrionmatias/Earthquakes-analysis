@@ -21,6 +21,7 @@ Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, pe
 ## Tecnologías utilizadas
 
 - Python 3.13
+- QGIS 3.40
 - Librerías estándar:
 
     - pathlib: manejo de carpetas y archivos
@@ -128,15 +129,17 @@ earthquakes-analysis/
 
 ## Ejemplos visuales
 
-![Distribucion](images/distribucion_zonas.png)
+![Distribucion](images/distribucion_zona.png)
 
 ![Alta magnitud](images/eventos_alta_magnitud_paises.png)
 
 ![Magnitudes](images/magnitudes.png)
 
-![USA vs Resto](images/Usa_vs_resto.png)
+![USA vs Resto](images/USA_vs_resto.png)
 
 ![Máximo terremoto por año](images/max_terremoto_año.png)
+
+![Mapa distribución](images/Mapa_terremotos.png)
 
 ## Conclusiones
 
