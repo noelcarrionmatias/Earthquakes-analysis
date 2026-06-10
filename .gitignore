@@ -3,6 +3,7 @@ database/processed/
 database/raw_api/
 database/raw/
 database/geoespatial/
+database/proyecto_qgis.qgz.bak
 database/proyecto_qgis.qgz
 
 # Python cache
