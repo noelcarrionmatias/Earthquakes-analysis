@@ -12,16 +12,21 @@ En el proyecto se construye un pipeline completo de datos (ETL) para analizar la
 - Transformación y limpieza de datos
 - Enriquecimiento geoespacial con GeoPandas
 - Almacenamiento en SQLite
-- Análisis y visualización en Python
+- Análisis y visualización en Python y Power BI
 
-El dataset final contiene más de 3 millones de registros oficiales, incluyendo los terremotos de magnitud 0 a 10.
+El dataset final contiene más de 3 millones de registros oficiales, incluyendo los terremotos de magnitud inferior a 2 (normalmente excluidos en estudios).
+
+Para el dashboard en Power BI se ha optado por trabajar con datasets agregados en lugar de la base completa, optimizando el rendimiento y aplicando las buenas prácticas habituales de BI
 
 Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, perfecto para proyectos como éste y mejora su portabilidad.
 
+Se incluye un pipeline completo para la explotación de datos en archivos CSV.
+
 ## Tecnologías utilizadas
 
-- Python 3.13
 - QGIS 3.40
+- Power BI
+- Python 3.13
 - Librerías estándar:
 
     - pathlib: manejo de carpetas y archivos
@@ -39,10 +44,10 @@ Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, pe
 
 1. Extracción:
     - Descarga de datos desde la API de USGS
-    - División de consultar por meses/semanas para evitar límites de API
+    - División de consultas por meses/semanas para evitar límites de API
 
 2. Transformación:
-    - Conversion de fechas
+    - Conversión de fechas
     - Creación de nuevas variables
     - Extracción y normalización del nombre de países
     - Enriquecimiento geoespacial con GeoPandas
@@ -55,9 +60,11 @@ Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, pe
 ## Problemas encontrados
 
 - Límite de registros por consulta API (20.000)
-- Solución: 
-    - División de consultar por rangos semanales (main_failed_range_API.py)
+
+Solución implementada: 
+    - División de consultas por rangos semanales (main_failed_range_API.py)
     - Implementación de validaciones
+    - Preproceso de rangos fallidos
 
 ## Estructura
 
@@ -73,6 +80,8 @@ earthquakes-analysis/
 
 - notebooks/ # Análisis exploratorio
 
+- power bi/ # Dashboard y tablas utilizadas
+
 - sql/ # Schema y queries utilizadas
 
 - src/ # Lógica ETL
@@ -80,12 +89,13 @@ earthquakes-analysis/
 - main_API.py # Pipeline principal API
 - main_CSV.py # Pipeline con datos CSV
 - main_failer_range_API.py # Pipeline secundario API
+- dashboard.pbix
 - README.md
 
 ## Preguntas a responder
 
 - Número de terremotos por país.
-- Qué país tiene mayor actividad sísmica.
+- Países con mayor actividad sísmica.
 - Top 10 terremotos.
 - Evolución temporal de terremotos.
 - Relación magnitud vs profundidad.
@@ -101,8 +111,7 @@ earthquakes-analysis/
 
 ### 2. Evolución temporal
 
-- Incremento de los registros desde 2000 a 2020
-- Refleja mayor detección de sísmos
+- Incremento de los registros desde 2000 a 2020, pero no asegura que sea por un aumento de la actividad sísmica, sino por una mejora en los sistemas de detección.
 
 ### 3. Distribución geográfica
 
@@ -143,17 +152,28 @@ earthquakes-analysis/
 
 ## Conclusiones
 
-- Actividad sísmica global constante y de baja intensidad
+- Actividad sísmica global constante y de baja intensidad principalmente (70% inferior a magnitud 2).
 - El aumento de registros está influenciado por mejoras tecnológicas y distribución de puntos de control.
-- La distribución espacial sísmica confirma los límites de placas tectónicas
+- La distribución geográfica de los sísmos confirma los límites de placas tectónicas.
+- Los países con mayor número de registros no coincide necesariamente con los terremotos más intensos.
+
+
+## Valor del proyecto
+
+El proyecto demuestra:
+
+- Desarrollo de pipelines ETL completos.
+- Consumo de APIs reales con restricciones.
+- Tratamiento de grandes volúmenes de datos (>3M registros).
+- Análisis geoespacial con GeoPandas.
+- Visualización y comunicación
 
 ## Posibles mejoras
 
-- Dashboard interactivo en Power BI 
-- Automatización del pipeline y análisis en tiempo real
-- Modelos predictivos
+- Automatización del pipeline y análisis en tiempo real.
+- Modelos predictivos.
 
 ## Sobre los datos
 
-Debido al tamaño del dataset, no está incluido en el respositorio.
-Para reproducir los resutados, ejecutar "main_API.py"
+Debido al tamaño del dataset, no está incluido en el repositorio.
+Para reproducir los resultados, ejecutar "main_API.py".
