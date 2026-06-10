@@ -77,7 +77,7 @@ earthquakes-analysis/
 ## Análisis realizado
 
 ### 1. Distribución por magnitud
-"images/numero de terremotos por categoria.png"
+images/numero de terremotos por categoria.png
 
 ## Preguntas a responder
 
