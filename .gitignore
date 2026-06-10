@@ -1,11 +1,14 @@
-# Excepciones específicas del proyecto
-__pycache__/
+# Database
+database/processed/
+database/raw_api/
+database/raw/
+database/geoespatial/
+database/proyecto_qgis.qgz
+
+# Python cache
+src/__pycache__/
 *.pyc
-logs/
-log.txt
-venv/
-.env
-pruebas/
-pruebas.*
-database/
-config.py
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+

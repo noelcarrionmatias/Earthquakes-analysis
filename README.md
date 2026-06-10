@@ -51,7 +51,14 @@ Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, pe
     - Control de errores y recuperación de datos fallidos en consulta de API
     - Dataset final completo
 
-# Estructura
+## Problemas encontrados
+
+- Límite de registros por consulta API (20.000)
+- Solución: 
+    - División de consultar por rangos semanales (main_failed_range_API.py)
+    - Implementación de validaciones
+
+## Estructura
 
 earthquakes-analysis/
 
@@ -74,11 +81,6 @@ earthquakes-analysis/
 - main_failer_range_API.py # Pipeline secundario API
 - README.md
 
-## Análisis realizado
-
-### 1. Distribución por magnitud
-images/numero de terremotos por categoria.png
-
 ## Preguntas a responder
 
 - Número de terremotos por país.
@@ -88,21 +90,67 @@ images/numero de terremotos por categoria.png
 - Relación magnitud vs profundidad.
 - Distribución geográfica (mapa).
 - Frecuencia de terremotos > 6 por año.
-- Clustering por zonas sísmicas.
 
-# Modelado de procesamiento
+## Análisis realizado
 
-- ETL:
-    - Descarga de datos de terremotos en https://earthquake.usgs.gov/ en formato CSV y capa de países (1:10m Cultural Vectors - Admin 0 - countries) en https://www.naturalearthdata.com/
-    - Inspección de la estructura de datos en Python
-    - CLEAN data mediante Python
-        - Dar formato de fecha a la fecha del terremoto
-        - Crear columnas necesarias para su posterior análisis
-        - Extraer el país y normalizarlo a través de un spatial join con geopandas y la capa de países de naturalearthdata.
-    - Cargar datos, crear tablas y vistas con SQLite
-- Generar gráficas en Power BI y Python
+### 1. Distribución por magnitud
 
+- >70% de los terremotos son de magnitud <2
+- Confirmación de una actividad sísmica activa pero de baja intensidad
 
-# Requisitos
+### 2. Evolución temporal
 
-- Respetar la estructura organizativa del proyecto
+- Incremento de los registros desde 2000 a 2020
+- Refleja mayor detección de sísmos
+
+### 3. Distribución geográfica
+
+- Mayor actividad sísmica en el Anillo de Fuego del Pacífico, seguido del Cinturón Transasiático.
+- Fuerte actividad en zonas oceánicas 
+
+### 4. Sesgo de datos
+
+- USA domina debido a la mejor red de sensores y a la cantidad de sísmos con magnitud <2
+- En sísmos de magnitud >4 elimina esta dominancia
+
+### 5. Eventos de alta magnitud
+
+- Concentración de países sísmicamente activos:
+    - Indonesia
+    - Chile
+    - Papua Nueva Guinea
+    - Argentina
+    - Iran
+    - Afganistan
+    - Japón
+    - Perú
+    - México
+
+## Ejemplos visuales
+
+images/distribucion_zonas.png
+
+images/eventos_alta_magnitud_paises.png
+
+images/magnitudes.png
+
+images/Usa_vs_resto.png
+
+images/max_terremoto_año.png
+
+## Conclusiones
+
+- Actividad sísmica global constante y de baja intensidad
+- El aumento de registros está influenciado por mejoras tecnológicas y distribución de puntos de control.
+- La distribución espacial sísmica confirma los límites de placas tectónicas
+
+## Posibles mejoras
+
+- Dashboard interactivo en Power BI 
+- Automatización del pipeline y análisis en tiempo real
+- Modelos predictivos
+
+## Sobre los datos
+
+- Debido al tamaño del dataset, no está incluido en el respositorio.
+- Para reproducir los resutados, ejecutar "main_API.py"
