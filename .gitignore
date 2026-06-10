@@ -6,6 +6,6 @@ log.txt
 venv/
 .env
 pruebas/
-pruebas.py
+pruebas.*
 database/
 config.py
