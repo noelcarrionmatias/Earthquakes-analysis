@@ -16,7 +16,7 @@ En el proyecto se construye un pipeline completo de datos (ETL) para analizar la
 
 El dataset final contiene más de 3 millones de registros oficiales, incluyendo los terremotos de magnitud inferior a 2 (normalmente excluidos en estudios).
 
-Para el dashboard en Power BI se ha optado por trabajar con datasets agregados en lugar de la base completa, optimizando el rendimiento y aplicando las buenas prácticas habituales de BI
+Para el dashboard en Power BI se ha optado por trabajar con un dataset resumen en lugar de la base completa, optimizando el rendimiento y aplicando las buenas prácticas habituales de BI.
 
 Se utiliza SQLite al no necesitar instalar nada. Genera un archivo local .db, perfecto para proyectos como éste y mejora su portabilidad.
 
@@ -136,17 +136,39 @@ earthquakes-analysis/
     - Perú
     - México
 
+### 6. Dashboard
+
+#### Captura principal del Dashboard
+
+![Dashboard](images/dashboard.png)
+
+#### Captura ejemplo del Dashboard filtrado por período (2012-2017) y países (South Africa, South Korea, Spain)
+
+![Dashboard_example](images/dashboard_example.png)
+
 ## Ejemplos visuales
+
+### Distribución
 
 ![Distribucion](images/distribucion_zona.png)
 
+### Alta magnitud
+
 ![Alta magnitud](images/eventos_alta_magnitud_paises.png)
+
+### Magnitudes
 
 ![Magnitudes](images/magnitudes.png)
 
+### USA vs Resto
+
 ![USA vs Resto](images/USA_vs_resto.png)
 
+### Máxima magnitud por año
+
 ![Máximo terremoto por año](images/max_terremoto_año.png)
+
+### Mapa distribución
 
 ![Mapa distribución](images/Mapa_terremotos.png)
 
