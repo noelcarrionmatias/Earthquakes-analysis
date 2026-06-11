@@ -156,9 +156,9 @@ earthquakes-analysis/
 
 ![Alta magnitud](images/eventos_alta_magnitud_paises.png)
 
-### Magnitudes
+### Categorías
 
-![Magnitudes](images/magnitudes.png)
+![Categorías](images/frecuencia%20categoria.png)
 
 ### USA vs Resto
 
